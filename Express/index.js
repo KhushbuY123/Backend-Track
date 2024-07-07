@@ -14,15 +14,29 @@ app.listen(port,()=>{
 //     })
 // })
 
-app.get("/",(req,res)=>{
-    res.send("you contacted to path")
-})
+// app.get("/",(req,res)=>{
+//     res.send("you contacted to home path")
+// })
 
-app.get("/about",(req,res)=>{
-    res.send("you contacted to about path")
-})
+// app.get("/:username/:id",(req,res)=>{
+//     let {username ,id}=req.params
+//     res.send(`you contacted to @${username}.`)
+// })
 
-app.get("*",(req,res)=>{
-    res.send("Path doesn't exist")
-})
+
+app.get("/search",(req,res)=>{
+    let {q}=req.query;
+    if(!q){
+      res.send("result not found")  
+    }
+    res.send(`Result found @${q}`)
+    // let q=req.query
+});
+// app.get("/about",(req,res)=>{
+//     res.send("you contacted to new about path")
+// })
+
+// app.get("*",(req,res)=>{
+//     res.send("Path doesn't exist")
+// })
 
