@@ -44,7 +44,7 @@ class Person{
 //.............Inheritence...........................
 class Student extends Person{
     constructor(name,age,marks){
-        super(name,age);
+        super(name,age);  //parent class ke constrcutor ko call lga rhe hai
         this.marks=marks;
     }
     greet(){
@@ -53,4 +53,3 @@ class Student extends Person{
 }
 let s1=new Student("adman",23,56)
 console.log(s1)
-

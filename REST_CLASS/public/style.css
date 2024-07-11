@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(10, 20, 20);
+}
+h1{
+    color: white;
+    text-align: center;
+}
+.post{
+    background-color: rgb(231, 205, 171);
+    margin:2rem;
+    padding: 0.5rem;
+}
+.username{
+    font-style: italic;
+}
