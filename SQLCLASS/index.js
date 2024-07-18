@@ -1,5 +1,11 @@
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
+const express=require("express")
+const app=express()
+const path=require("path")
+
+app.set("view engine","ejs");
+app.set("views",path.join(__dirname,"/views"));
 
 // Create the connection to database
 const connection = mysql.createConnection({
@@ -13,30 +19,50 @@ const connection = mysql.createConnection({
 let getRandomUser=()=>  {
     return [
       faker.datatype.uuid(),
-      faker.internet.userName(),
+      faker.internet.username(),
       faker.internet.email(),
       faker.internet.password(),
   ]};
 
-let q="INSERT INTO user (id,username,email,password) VALUES ?";
-let data=[]
-for(let i=1;i<=100;i++){
-    data.push(getRandomUser())
-}
-// A simple SELECT query
-try{
-connection.query(q,[data],(err,result)=>{
- if(err) throw err;
- console.log(result)
- console.log(result.length)
-});}
-catch(err){
-    console.log(err)
-}
-connection.end();
+// let q="INSERT INTO user (id,username,email,password) VALUES ?";
+// let data=[]
+// for(let i=1;i<=100;i++){
+//     data.push(getRandomUser())
+// }
+
+app.get("/",(req,res)=>{
+  let q=`SELECT count(*) FROM user`;
+  // Home Route
+  try{
+  connection.query(q,(err,result)=>{
+   if(err) throw err;
+   let count=result[0]["count(*)"]
+   res.render("home.ejs",{count});
+  });}
+  catch(err){
+      console.log(err)
+      res.send("some error in Db")
+  }
+})
+
+app.get("/user",(req,res)=>{
+  let q=`SELECT * FROM user`;
+  // Show User Route
+  try{
+  connection.query(q,(err,result)=>{
+   if(err) throw err;
+   res.render("user.ejs",{result});
+  });}
+  catch(err){
+      console.log(err)
+      res.send("some error in Db")
+  }
+})
 
 
-
+app.listen("8080",()=>{
+  console.log("Hi , there this is me")
+})
 
 
 
