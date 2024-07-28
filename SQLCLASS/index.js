@@ -15,14 +15,14 @@ const connection = mysql.createConnection({
     password:'Khushbu@1023'
   });
 
-//INSERT NEW DATA.....
-let getRandomUser=()=>  {
-    return [
-      faker.datatype.uuid(),
-      faker.internet.username(),
-      faker.internet.email(),
-      faker.internet.password(),
-  ]};
+// INSERT NEW DATA.....
+// let getRandomUser=()=>  {
+//     return [
+//       faker.string.uuid(),
+//       faker.internet.username(),
+//       faker.internet.email(),
+//       faker.internet.password(),
+//   ]};
 
 // let q="INSERT INTO user (id,username,email,password) VALUES ?";
 // let data=[]
@@ -59,6 +59,23 @@ app.get("/user",(req,res)=>{
   }
 })
 
+
+app.get("/user/:id/edit",(req,res)=>{
+  let {id}=req.params;
+  let q=`SELECT * FROM user WHERE id='${id}'`
+  try{
+    connection.query(q,(err,result)=>{
+      if (err) throw err;
+      let user=result[0]
+      console.log(result)
+      res.render("edit.ejs",{user})
+    });
+  }
+  catch(err){
+    console.log(err)
+    res.send("some error in Db")
+}
+});
 
 app.listen("8080",()=>{
   console.log("Hi , there this is me")
