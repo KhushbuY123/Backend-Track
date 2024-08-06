@@ -17,3 +17,25 @@ const userSchema=new mongoose.Schema({
 })
 const User=mongoose.model("User",userSchema);
 const Employee=mongoose.model("Employee",userSchema)
+const usre1=new User({name:"khushbuyadav",email:"khushbuyad123@gmail.com",age:21})
+usre1.save().then((res)=>{
+  console.log(res)
+})
+.catch((err)=>{
+  console.log(err);
+});
+User.insertMany([
+  {name:"muskan",email:"muku@gmail.com",age:20},
+  {name:"suman",email:"bruce@gmail.com",age:24}
+]).then((data)=>{
+  console.log(data)
+})
+// User.find({age:{$gte:22}}).then((data)=>{
+//   console.log(data)
+// })
+// User.updateOne({name:"khushbu"},{age:20}).then((res)=>{
+//   console.log(res)
+// })
+User.deleteOne({name:"khushbuyadav"}).then((res)=>{
+  console.log(res)
+})

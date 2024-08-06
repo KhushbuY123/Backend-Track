@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "figlet": "^1.7.0"
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "figlet": "^1.7.0",
+    "mongoose": "^8.5.2"
   }
 }
